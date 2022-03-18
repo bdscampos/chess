@@ -5,6 +5,9 @@ public class Tabuleiro {
     private Peca[][] pecas;
 
     public Tabuleiro(int linhas, int colunas) {
+        if (linhas < 1 || colunas < 1){
+            throw new BoardException("Erro criando tabuleiro, precisa 1 linha e coluna no mínimo");
+        }
         this.linhas = linhas;
         this.colunas = colunas;
         pecas = new Peca[linhas][colunas];
@@ -14,29 +17,45 @@ public class Tabuleiro {
         return linhas;
     }
 
-    public void setLinhas(int linhas) {
-        this.linhas = linhas;
-    }
-
     public int getColunas() {
         return colunas;
     }
 
-    public void setColunas(int colunas) {
-        this.colunas = colunas;
-    }
-
     public Peca peca(int linha, int coluna){
+        if (!existePosicao(linha, coluna)){
+            throw new BoardException("Posição fora do tabuleiro");
+        }
         return pecas[linha][coluna];
     }
 
     public Peca peca(Posicao posicao){
+        if (!existePosicao(posicao)){
+            throw new BoardException("Posição fora do tabuleiro");
+        }
         return pecas[posicao.getLinha()][posicao.getColuna()];
     }
 
     public void colocarPeca(Peca p, Posicao pos){
+        if (temUmaPeca(pos)){
+            throw new BoardException("Já existe uma peça na posição "+ pos);
+        }
         pecas[pos.getLinha()][pos.getColuna()] = p;
         p.posicao = pos;
     }
 
+    private boolean existePosicao(int linha, int coluna){
+         return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
+
+    }
+
+    public boolean existePosicao(Posicao pos){
+        return existePosicao(pos.getLinha(), pos.getColuna());
+    }
+
+    public boolean temUmaPeca(Posicao pos){
+        if (!existePosicao(pos)){
+            throw new BoardException("Posição fora do tabuleiro");
+        }
+        return peca(pos) != null;
+    }
 }
