@@ -16,7 +16,7 @@ public class Programa {
         Scanner sc = new Scanner(System.in);
         List<PecaXadrez> list = new ArrayList<>();
 
-        while (true) {
+        while (!partida.getChequeMate()) {
             try {
                 UI.limpaTela();
                 UI.imprimePartida(partida, list);
@@ -41,5 +41,7 @@ public class Programa {
                 sc.nextLine();
             }
         }
+        UI.limpaTela();
+        UI.imprimePartida(partida,list);
     }
 }

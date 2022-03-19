@@ -18,6 +18,7 @@ public class PartidaXadrez {
     private List<Peca> pecasNoTabuleiro = new ArrayList<>();
     private List<Peca> pecasCapturadas = new ArrayList<>();
     private Boolean cheque = false;
+    private Boolean chequeMate = false;
 
     public Cor getJogadorAtual() {
         return jogadorAtual;
@@ -28,6 +29,8 @@ public class PartidaXadrez {
     }
 
     public boolean getCheque(){ return cheque; }
+
+    public boolean getChequeMate(){ return chequeMate; }
 
     public PartidaXadrez() {
         this.rodada = 1;
@@ -86,6 +89,9 @@ public class PartidaXadrez {
             desfazerMovimento(inicio, fim, pecaCapturada);
         }
         cheque = (testeCheque(oponente(jogadorAtual))) ? true : false;
+        if (testeChequeMate(oponente(jogadorAtual))){
+            chequeMate = true;
+        }
         trocaRodada();
         return (PecaXadrez) pecaCapturada;
     }
@@ -139,6 +145,33 @@ public class PartidaXadrez {
             if (mat[posicaoRei.getLinha()][posicaoRei.getColuna()]) return true;
         }
         return false;
+    }
+
+    private boolean testeChequeMate(Cor cor){
+        if (!testeCheque(cor)){
+            return false;
+        }
+        List<Peca> list = pecasNoTabuleiro.stream().filter(x -> ((PecaXadrez)x).getCor() == cor).collect(Collectors.toList());
+        for (Peca p : list){
+            boolean[][] mat = p.movimentosPossiveis();
+            for (int i = 0; i<tabuleiro.getLinhas(); i++){
+                for (int j = 0; j<tabuleiro.getColunas();j++){
+                    if(mat[i][j]){
+                        Posicao origem = ((PecaXadrez)p).getPosicaoXadrez().convertePosicao();
+                        Posicao destino = new Posicao(i,j);
+                        Peca capturada = fazerMovimento(origem,destino);
+                        boolean testeCheque = testeCheque(cor);
+                        desfazerMovimento(origem,destino,capturada);
+                        if (!testeCheque){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return true;
     }
 
     private void inicializaPartida(){

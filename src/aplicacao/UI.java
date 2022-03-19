@@ -60,7 +60,7 @@ public class UI {
     }
 
     private static void imprimePeca(PecaXadrez peca, boolean bg){
-        if (bg == true){
+        if (bg){
             System.out.print(ANSI_BLUE_BACKGROUND);
         }
         if (peca == null){
@@ -92,12 +92,16 @@ public class UI {
         System.out.println();
         imprimePecasCapturadas(capturada);
         System.out.println();
-        System.out.println("Rodada: " + partida.getRodada());
-        System.out.println("Aguardando jogador da peça: " + partida.getJogadorAtual());
-        if (partida.getCheque()){
-            System.out.println("CHEQUE");
+        if (!partida.getChequeMate()) {
+            System.out.println("Rodada: " + partida.getRodada());
+            System.out.println("Aguardando jogador da peça: " + partida.getJogadorAtual());
+            if (partida.getCheque()) {
+                System.out.println("CHEQUE");
+            }
+        }else{
+            System.out.println("CHEQUE MATE");
+            System.out.println("Vencedor: " + partida.getJogadorAtual());
         }
-
 
     }
 
