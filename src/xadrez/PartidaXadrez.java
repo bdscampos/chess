@@ -8,12 +8,30 @@ import xadrez.pecas.Torre;
 
 public class PartidaXadrez {
 
+    private Cor jogadorAtual;
     private Tabuleiro tabuleiro;
-    private int rodada = 0;
+    private int rodada;
+
+    public Cor getJogadorAtual() {
+        return jogadorAtual;
+    }
+
+    public int getRodada() {
+        return rodada;
+    }
 
     public PartidaXadrez() {
+        this.rodada = 1;
+        this.jogadorAtual = Cor.BRANCO;
         this.tabuleiro = new Tabuleiro(8,8);
         inicializaPartida();
+    }
+
+    private void trocaRodada(){
+        if (jogadorAtual == Cor.PRETO) {
+            rodada++;
+        }
+        jogadorAtual = (jogadorAtual == Cor.BRANCO) ? Cor.PRETO : Cor.BRANCO;
     }
 
     public PecaXadrez[][] retornaPecas(){
@@ -36,6 +54,7 @@ public class PartidaXadrez {
         validarPosicaoOrigem(inicio);
         validarPosicaoDestino(inicio, fim);
         Peca pecaCapturada = fazerMovimento(inicio, fim);
+        trocaRodada();
         return (PecaXadrez) pecaCapturada;
     }
 
@@ -51,6 +70,9 @@ public class PartidaXadrez {
         }
         if (!tabuleiro.peca(pos).temAlgumMovimentoPossivel()){
             throw new ChessException("Não existem movimentos possíveis para a peça escolhida");
+        }
+        if (jogadorAtual != ((PecaXadrez) tabuleiro.peca(pos)).getCor()) {
+            throw new ChessException("Não é possível mover peça do outro jogador");
         }
     }
 

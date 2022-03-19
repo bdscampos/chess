@@ -1,6 +1,7 @@
 package aplicacao;
 
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 import xadrez.PosicaoXadrez;
 
@@ -81,5 +82,13 @@ public class UI {
             System.out.println();
         }
         System.out.println("  a b c d e f g h");
+    }
+
+    public static void imprimePartida(PartidaXadrez partida){
+        imprimeTabuleiro(partida.retornaPecas());
+        System.out.println();
+        System.out.println("Rodada: " + partida.getRodada());
+        System.out.println("Aguardando jogador da peça: " + partida.getJogadorAtual());
+
     }
 }
