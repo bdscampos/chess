@@ -94,6 +94,9 @@ public class UI {
         System.out.println();
         System.out.println("Rodada: " + partida.getRodada());
         System.out.println("Aguardando jogador da peça: " + partida.getJogadorAtual());
+        if (partida.getCheque()){
+            System.out.println("CHEQUE");
+        }
 
 
     }
