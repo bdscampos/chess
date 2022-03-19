@@ -61,6 +61,12 @@ public class PartidaXadrez {
         return  pecaCapturada;
     }
 
+    public boolean[][] movimentosPossiveis(PosicaoXadrez origem){
+        Posicao posicao = origem.convertePosicao();
+        validarPosicaoOrigem(posicao);
+        return tabuleiro.peca(posicao).movimentosPossiveis();
+    }
+
     private void inicializaPartida(){
         colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('a', 8, new Torre(tabuleiro, Cor.PRETO));
