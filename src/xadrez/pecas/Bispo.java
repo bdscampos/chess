@@ -28,7 +28,7 @@ public class Bispo extends PecaXadrez {
         p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
         while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
             mat[p.getLinha()][p.getColuna()] = true;
-            p.setValores(p.getLinha() +1, p.getColuna() - 1);
+            p.setValores(p.getLinha() + 1, p.getColuna() - 1);
         }
         if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
             mat[p.getLinha()][p.getColuna()] = true;

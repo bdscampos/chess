@@ -1,5 +1,6 @@
 package xadrez.pecas;
 
+import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
@@ -12,7 +13,73 @@ public class Rainha extends PecaXadrez {
 
     @Override
     public boolean[][] movimentosPossiveis() {
-        return new boolean[0][];
+        boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+        Posicao p = new Posicao(0,0);
+        p.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() - 1, p.getColuna() - 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() - 1, p.getColuna() + 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha() - 1, posicao.getColuna());
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() - 1, p.getColuna());
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha(), posicao.getColuna() + 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha(), p.getColuna() + 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha(), posicao.getColuna() - 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha(), p.getColuna() - 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() + 1, p.getColuna() - 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna());
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() + 1, p.getColuna());
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
+        while(getTabuleiro().existePosicao(p) && !getTabuleiro().temUmaPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setValores(p.getLinha() + 1, p.getColuna() + 1);
+        }
+        if (getTabuleiro().existePosicao(p) && temUmaPecaAdversaria(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+        return mat;
     }
 
     @Override
