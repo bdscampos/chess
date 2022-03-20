@@ -33,6 +33,11 @@ public class Programa {
                 if (pecaCapturada != null){
                     list.add(pecaCapturada);
                 }
+                if (partida.getPromovido() != null){
+                    System.out.print("Digite a nova peça: (B/Q/C/T) ");
+                    String tipo = sc.nextLine();
+                    partida.trocarPecaPromovida(tipo);
+                }
             }catch (ChessException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
