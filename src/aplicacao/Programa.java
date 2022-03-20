@@ -5,10 +5,7 @@ import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 import xadrez.PosicaoXadrez;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Programa {
     public static void main(String[] args) {
@@ -35,7 +32,11 @@ public class Programa {
                 }
                 if (partida.getPromovido() != null){
                     System.out.print("Digite a nova peça: (B/Q/C/T) ");
-                    String tipo = sc.nextLine();
+                    String tipo = sc.nextLine().toUpperCase();
+                    while (!tipo.equals("B") && !tipo.equals("T") && !tipo.equals("C") && !tipo.equals("Q")){
+                        System.out.print("Digite um valor válido.");
+                        tipo = sc.nextLine().toUpperCase();
+                    }
                     partida.trocarPecaPromovida(tipo);
                 }
             }catch (ChessException e){

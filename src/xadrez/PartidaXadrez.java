@@ -4,8 +4,6 @@ import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.pecas.*;
-
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -200,8 +198,8 @@ public class PartidaXadrez {
         if (promovido == null){
             throw new IllegalStateException("Não há peça para ser promovida");
         }
-        if (!tipo.equals("B") && !tipo.equals("T") && !tipo.equals("C") && !tipo.equals("Q") && !tipo.equals("b") && !tipo.equals("t") && !tipo.equals("c") && !tipo.equals("q")){
-            throw new InvalidParameterException("Valor inválido de peça para promoção");
+        if (!tipo.equals("B") && !tipo.equals("T") && !tipo.equals("C") && !tipo.equals("Q")){
+            return promovido;
         }
         Posicao pos = promovido.getPosicaoXadrez().convertePosicao();
         Peca p = tabuleiro.removerPeca(pos);
@@ -214,9 +212,9 @@ public class PartidaXadrez {
     }
 
     private PecaXadrez novaPeca(String tipo, Cor cor){
-        if (tipo.equals("B") || tipo.equals("b")) return new Bispo(tabuleiro, cor);
-        if (tipo.equals("C") || tipo.equals("c")) return new Cavalo(tabuleiro, cor);
-        if (tipo.equals("T") || tipo.equals("t")) return new Torre(tabuleiro, cor);
+        if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
+        if (tipo.equals("C")) return new Cavalo(tabuleiro, cor);
+        if (tipo.equals("T")) return new Torre(tabuleiro, cor);
         return new Rainha(tabuleiro, cor);
     }
 
