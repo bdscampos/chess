@@ -3,6 +3,7 @@ package xadrez;
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
+import xadrez.pecas.Bispo;
 import xadrez.pecas.Peao;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
@@ -179,6 +180,8 @@ public class PartidaXadrez {
         colocarNovaPeca('e', 1, new Rei(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('a', 1, new Torre(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('h', 1, new Torre(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('c', 1, new Bispo(tabuleiro, Cor.BRANCO));
+        colocarNovaPeca('f', 1, new Bispo(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('a', 2, new Peao(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('b', 2, new Peao(tabuleiro, Cor.BRANCO));
         colocarNovaPeca('c', 2, new Peao(tabuleiro, Cor.BRANCO));
